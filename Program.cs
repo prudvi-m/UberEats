@@ -3,6 +3,10 @@ using UberEats.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add session services
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -10,11 +14,6 @@ builder.Services.AddDbContext<UberContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("UberContext")));
 
 var app = builder.Build();
-
-// Add session services
-builder.Services.AddMemoryCache();
-builder.Services.AddSession();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
