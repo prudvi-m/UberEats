@@ -26,5 +26,7 @@ namespace UberEats.Models
 
       [ValidateNever]
       public Driver Driver { get; set; } = null!;
+      
+      public string LogoImage { get; set; } = string.Empty;
     }
 }

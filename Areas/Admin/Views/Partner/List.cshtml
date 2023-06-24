@@ -43,7 +43,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Type</th>
-                    <th>Status</th>
+                    @* <th>Status</th> *@
                     <th></th>
                     <th></th>
             </thead>
@@ -76,8 +76,8 @@
                         else if(@p.DriverID==7){
                             <td>retail</td>
                         }
-                        <td> <a asp-action="Approve"
-                               asp-route-id="@p.PartnerID">new</a></td>
+                        @* <td> <a asp-action="Approve"
+                               asp-route-id="@p.PartnerID">new</a></td> *@
                        
                         @* <td>@p.Price.ToString("C")</td> *@
                         <td>
@@ -88,6 +88,7 @@
                             <a asp-action="Delete"
                                asp-route-id="@p.PartnerID">Delete</a>
                         </td>
+                        
                     </tr>
                 }
             </tbody>

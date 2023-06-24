@@ -11,6 +11,11 @@ builder.Services.AddDbContext<UberContext>(options =>
 
 var app = builder.Build();
 
+// Add session services
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -23,6 +28,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

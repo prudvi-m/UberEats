@@ -18,6 +18,42 @@ namespace UberEats.Controllers
                     .ToList();
             ViewBag.Drivers = categories;
         }
+
+        public IActionResult List(string id = "All")
+        {
+            List<Partner> products;
+            if (id == "All")
+            {
+                products = context.Partners
+                    .OrderBy(p => p.PartnerID).ToList();
+            }
+            else
+            {
+                products = context.Partners
+                    .Where(p => p.Driver.Name == id)
+                    .OrderBy(p => p.PartnerID).ToList();
+            }
+
+            // use ViewBag to pass category data to view
+            ViewBag.Drivers = categories;
+            ViewBag.SelectedCategoryName = id;
+
+            // bind products to view
+            return View(products);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var session = new UberSession(HttpContext.Session);
+            var model = new PartnersViewModel
+            {
+                Partner = context.Partners
+                    .FirstOrDefault(t => t.PartnerID == id) ?? new Partner(),
+                ActiveDiv = session.GetActiveDiv(),
+                ActiveConf = session.GetActiveConf()
+            };
+            return View(model);
+        }
       
         public IActionResult Index()
         {

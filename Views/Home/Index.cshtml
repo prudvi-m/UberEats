@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home";
+    string controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
 }
 
 <h1>Welcome to the Uber Eats!</h1>
@@ -13,6 +14,22 @@
 <div class="row">
     <div class="col-md-4">
         <div class="list-group">
+            @* show link to Favorites page unless on Favorites page *@
+            @if (controller != "Favorites")
+            {
+                @* var session = new NFLSession(Context.Session); *@
+                int? count = 0;
+
+                @* if there are fave teams in session, display faves link *@
+                @if(count.HasValue)
+                {
+                    <h5 class="bg-info p-2">
+                        <a asp-controller="Favorites" asp-action="Index" 
+                           class="text-white">My Favorite Teams</a>
+                        <span class="badge bg-light text-black">@count</span>
+                    </h5>
+                }
+            }
             <a asp-controller="Partner" asp-action="add"
                class="list-group-item">View our offerings</a>
             <a asp-controller="Home" asp-action="About"

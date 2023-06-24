@@ -32,7 +32,7 @@
         <input asp-for="BusinessPhone" class="form-control">
     </div>
        <div class="mb-3">
-        <label asp-for="DriverID" class="form-label">Driver</label>
+        <label asp-for="DriverID" class="form-label">Business Type</label>
         <select asp-for="DriverID"
                 asp-items="@(new SelectList(ViewBag.Drivers,
                          "DriverID","Name"))"
