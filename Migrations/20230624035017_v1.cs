@@ -48,7 +48,7 @@ namespace UberEats.Migrations
             migrationBuilder.InsertData(
                 table: "Drivers",
                 columns: new[] { "DriverID", "Name" },
-                values: new object[] { 1, "Restaurent" });
+                values: new object[] { 1, "Restaurant" });
 
             migrationBuilder.InsertData(
                 table: "Drivers",

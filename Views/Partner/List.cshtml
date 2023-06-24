@@ -12,9 +12,6 @@
         <div class="alert alert-primary">@TempData["message"]</div>
     </div>
 }
-
-
-
 <div class="row">
     <div class="col-md-2">
         <ul class="list-group">
@@ -56,7 +53,7 @@
                         <td>@p.BusinessEmail</td>
                         <td>@p.BusinessPhone</td>
                         @if(@p.DriverID==1){
-                              <td>Restaurent</td>
+                              <td>Restaurant</td>
                         }
                         else if(@p.DriverID==2){
                              <td>Grocery</td>
@@ -76,18 +73,7 @@
                         else if(@p.DriverID==7){
                             <td>retail</td>
                         }
-                        @* <td> <a asp-action="Approve"
-                               asp-route-id="@p.PartnerID">new</a></td> *@
-                       
-                        @* <td>@p.Price.ToString("C")</td> *@
-                        @* <td>
-                            <a asp-action="Update"
-                               asp-route-id="@p.PartnerID">Update</a>
-                        </td>
-                        <td>
-                            <a asp-action="Delete"
-                               asp-route-id="@p.PartnerID">Delete</a>
-                        </td> *@
+                        
                         <td>
                             <a asp-action="Menu"
                                asp-route-id="@p.PartnerID">Menu</a>

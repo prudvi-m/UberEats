@@ -36,7 +36,7 @@ namespace UberEats.Migrations
                         new
                         {
                             DriverID = 1,
-                            Name = "Restaurent"
+                            Name = "Restaurant"
                         },
                         new
                         {

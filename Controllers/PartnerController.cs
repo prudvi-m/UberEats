@@ -42,7 +42,7 @@ namespace UberEats.Controllers
             return View(products);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Detail(int id)
         {
             var session = new UberSession(HttpContext.Session);
             var model = new PartnersViewModel

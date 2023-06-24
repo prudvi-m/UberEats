@@ -18,7 +18,7 @@ namespace UberEats.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Driver>().HasData(
-                new Driver { DriverID = 1, Name = "Restaurent" },
+                new Driver { DriverID = 1, Name = "Restaurant" },
                 new Driver { DriverID = 2, Name = "Grocery" },
                 new Driver { DriverID = 3, Name = "Alcohol" },
                 new Driver {DriverID=4, Name="Convienience"},
