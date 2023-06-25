@@ -30,7 +30,23 @@ namespace UberEats.Models
             modelBuilder.Entity<Partner>().HasData(
                 new Partner
                 {
-                    PartnerID = 1, 
+                    PartnerID = 1,
+                    DriverID = 1,
+                    BusinessName = "intial",
+                    BusinessAddress = "Chicago, 3001",
+                    BusinessEmail = "intial@gmail.com",
+                    BusinessPhone = "123456"
+                },
+                {
+                    PartnerID = 2,
+                    DriverID = 1,
+                    BusinessName = "intial",
+                    BusinessAddress = "Chicago, 3001",
+                    BusinessEmail = "intial@gmail.com",
+                    BusinessPhone = "123456"
+                },
+                {
+                    PartnerID = 3,
                     DriverID = 1,
                     BusinessName = "intial",
                     BusinessAddress = "Chicago, 3001",
@@ -39,7 +55,7 @@ namespace UberEats.Models
                 },
                 new Partner
                 {
-                    PartnerID = 2,
+                    PartnerID = 4,
                     DriverID = 1,
                     BusinessName = "apple",
                     BusinessAddress = "401 North",
