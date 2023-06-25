@@ -17,15 +17,16 @@
             @* show link to Favorites page unless on Favorites page *@
             @if (controller != "Favorites")
             {
-                @* var session = new NFLSession(Context.Session); *@
-                int? count = 0;
+                var session = new UberSession(Context.Session);
+                int? count = session.GetMyPartnerCount();;
 
                 @* if there are fave teams in session, display faves link *@
                 @if(count.HasValue)
                 {
-                    <h5 class="bg-info p-2">
-                        <a asp-controller="Favorites" asp-action="Index" 
-                           class="text-white">My Favorite Teams</a>
+                    <h5 class="bg-light p-2">
+                        <a asp-controller="Favorites" asp-action="Index">
+                            My Favorite Teams
+                        </a>
                         <span class="badge bg-light text-black">@count</span>
                     </h5>
                 }

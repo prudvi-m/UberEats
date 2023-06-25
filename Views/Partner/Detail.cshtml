@@ -4,66 +4,61 @@
 }
 <div class="container">
     <div class="row">
-
-        
         <div class="col-lg-4 col-md-12">
-            <h2 class="text-center p-2">Partner Details</h2>
-            <img src="indianHarvest.jpg" class="img-fluid" alt="Your Image">
+            <h2 class="text-left p-2">Partner Details</h2>
+            <img src="/images/indianHarvest.jpg" class="img-fluid" alt="Your Image">
         </div>
 
         <div class="col-lg-8 col-md-12">
-
             <h2 class="text-center p-2">@Model.Partner.BusinessName</h2>
-
             <table class="table table-striped">
             <tbody>
                 <tr>
-                <td>Business Address:</td>
-                <td>@Model.Partner.BusinessAddress</td>
+                    <td>Business Address:</td>
+                    <td>@Model.Partner.BusinessAddress</td>
                 </tr>
                 <tr>
-                <td>Business Type:</td>
-
-                @if(Model.Partner.DriverID==1){
-                    <td>Restaurant</td>
-                }
-                else if(Model.Partner.DriverID==2){
-                    <td>Grocery</td>
-                }
-                else if(Model.Partner.DriverID==3){
-                    <td>Alcohol</td>
-                }
-                else if(Model.Partner.DriverID==4){
-                    <td>Convienience</td>
-                }
-                else if(Model.Partner.DriverID==5){
-                    <td>Flower shop</td>
-                }
-                else if(Model.Partner.DriverID==6){
-                    <td>Pet Store</td>
-                }
-                else if(Model.Partner.DriverID==7){
-                    <td>retail</td>
-                }
-                else {
-                    <td>Restaurant</td>
-                }
+                    <td>Business Type:</td>`
+                    @if(Model.Partner.DriverID==1){
+                        <td>Restaurant</td>
+                    }
+                    else if(Model.Partner.DriverID==2){
+                        <td>Grocery</td>
+                    }
+                    else if(Model.Partner.DriverID==3){
+                        <td>Alcohol</td>
+                    }
+                    else if(Model.Partner.DriverID==4){
+                        <td>Convienience</td>
+                    }
+                    else if(Model.Partner.DriverID==5){
+                        <td>Flower shop</td>
+                    }
+                    else if(Model.Partner.DriverID==6){
+                        <td>Pet Store</td>
+                    }
+                    else if(Model.Partner.DriverID==7){
+                        <td>retail</td>
+                    }
+                    else {
+                        <td>Restaurant</td>
+                    }
                 </tr>
                 <tr>
-                <td>Business Mail</td>
-                <td>@Model.Partner.BusinessEmail</td>
+                    <td>Business Mail</td>
+                    <td>@Model.Partner.BusinessEmail</td>
                 </tr>
                 <tr>
-                <td>Business Phone</td>
-                <td>@Model.Partner.BusinessPhone</td>
+                    <td>Business Phone</td>
+                    <td>@Model.Partner.BusinessPhone</td>
                 </tr>
             </tbody>
             </table>
-
-            <button type="submit" class="btn btn-primary">
-                Add to Favorites
-            </button>
-
+            <form asp-action="Add" asp-controller="Favorites" method="post">
+                <button type="submit" class="btn btn-primary">
+                    Add to Favorites
+                </button>
+            </form>
         </div>
     </div>
 </div>
