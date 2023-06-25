@@ -15,28 +15,23 @@
             Clear Favorites
         </button>
     </form>
-</div>
-
-
-<div class="row">
-    <div class="col-8 offset-2">
-        <ul class="list-group">
-            @foreach (Partner partner in Model.Partners)
-            {
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <img src="~/images/@partner.LogoImage" alt="" />
+    <div class="m-4">
+        <div class="col-6  offset-2">
+            <ul class="list-group">
+                @foreach (Partner partner in Model.Partners)
+                {
+                    <li class="list-group-item">
+                        <div class="row text-right">
+                            <div class="col-sm-4">
+                                @partner.BusinessName
+                            </div>
+                            <div class="col-sm-4">
+                                @partner.BusinessAddress
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            @partner.BusinessName
-                        </div>
-                        @* <div class="col-sm-4">
-                            @partner.Conference.Name @partner.Division.Name
-                        </div> *@
-                    </div>
-                </li>
-            }
-        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
