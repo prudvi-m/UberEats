@@ -1,0 +1,74 @@
+@model List<MenuItem>
+@{
+    ViewData["Title"] = "Welcome! Partner";
+}
+
+<h1>Menu for @ViewBag.BussinessName</h1>
+
+@if (TempData["message"] != null)
+{
+    <div class="col-sm-8">
+        <div class="alert alert-primary">@TempData["message"]</div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="list-group">
+            <a asp-action="List" asp-route-id="All" asp-route-partnerId="@ViewBag.partnerId"
+               class="list-group-item
+                @if (ViewBag.SelectedMenuCategoryName == "All") {
+                    <text>active</text>
+                } ">All</a>
+            @foreach (MenuCategory c in ViewBag.MenuCategories)
+            {
+                <a asp-action="List" asp-route-id="@c.Name"  asp-route-partnerId="@ViewBag.partnerId"
+                   class="list-group-item
+                         @(ViewBag.SelectedMenuCategoryName == c.Name ? "active" : "")">
+                    @c.Name
+                </a>
+            }
+        </ul>
+    </div>
+
+    <div class="col-md-10">
+        @if (Model.Count > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Menu Category</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var menuItem in Model)
+                    {
+                        <tr>
+                            <td>@menuItem.Name</td>
+                            <td>@menuItem.Price</td>
+                            <td>@menuItem.Description</td>
+                            <td>@menuItem.MenuCategory.Name</td>
+                            <td>
+                                <a asp-action="Update" asp-route-id="@menuItem.MenuItemID">Update</a>
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@menuItem.MenuItemID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a asp-action="Add" class="btn btn-primary" asp-route-partnerId="@ViewBag.partnerId">Add An Item</a>
+        }
+        else
+        {
+            <p>No records found.</p>
+            <a asp-action="Add" class="btn btn-primary" asp-route-partnerId="@ViewBag.partnerId">Add An Item</a>
+        }
+    </div>
+</div>

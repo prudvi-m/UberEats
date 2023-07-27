@@ -1,0 +1,39 @@
+@model MenuItem
+
+<h1 class="my-1">Add Item</h1>
+<form asp-action="Add" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="MenuCategoryID" class="form-label">Category</label>
+        <select asp-for="MenuCategoryID"
+                asp-items="@(new SelectList(ViewBag.MenuCategories,
+                         "MenuCategoryID","Name"))"
+                class="form-select"></select>
+        <span asp-validation-for="MenuCategoryID" class="text-danger"></span>
+    </div>  
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Item Name</label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Item Price</label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Item Description</label>
+        <input asp-for="Description" class="form-control">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="PartnerID" />
+    
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a asp-action="List" asp-route-partnerId=@Model.PartnerID class="btn btn-primary">Cancel</a>
+    
+</form>

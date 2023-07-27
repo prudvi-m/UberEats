@@ -1,8 +1,7 @@
 @model List<Partner>
 @{
-    ViewData["Title"] = "Partner";
+    ViewData["Title"] = "Welcome! Partner";
     ViewBag.Dta="new";
-   
 }
 
 <h1>@ViewBag.Title</h1>
@@ -20,7 +19,7 @@
                 @if (ViewBag.SelectedCategoryName == "All") {
                     <text>active</text>
                 } ">All</a>
-            @foreach (Driver c in ViewBag.Drivers)
+            @foreach (Category c in ViewBag.Categories)
             {
                 <a asp-action="List" asp-route-id="@c.Name"
                    class="list-group-item
@@ -42,7 +41,6 @@
                     <th>Type</th>
                     @* <th>Status</th> *@
                     <th></th>
-                    <th></th>
             </thead>
             <tbody>
                 @foreach (var p in Model)
@@ -52,35 +50,29 @@
                         <td>@p.BusinessAddress</td>
                         <td>@p.BusinessEmail</td>
                         <td>@p.BusinessPhone</td>
-                        @if(@p.DriverID==1){
+                        @if(@p.CategoryID==1){
                               <td>Restaurant</td>
                         }
-                        else if(@p.DriverID==2){
+                        else if(@p.CategoryID==2){
                              <td>Grocery</td>
                         }
-                        else if(@p.DriverID==3){
+                        else if(@p.CategoryID==3){
                             <td>Alcohol</td>
                         }
-                         else if(@p.DriverID==4){
+                         else if(@p.CategoryID==4){
                             <td>Convienience</td>
                         }
-                         else if(@p.DriverID==5){
+                         else if(@p.CategoryID==5){
                             <td>Flower shop</td>
                         }
-                        else if(@p.DriverID==6){
+                        else if(@p.CategoryID==6){
                             <td>Pet Store</td>
                         }
-                        else if(@p.DriverID==7){
+                        else if(@p.CategoryID==7){
                             <td>retail</td>
                         }
-                        
                         <td>
-                            <a asp-action="Menu"
-                               asp-route-id="@p.PartnerID">Menu</a>
-                        </td>
-                        <td>
-                            <a asp-action="Detail"
-                               asp-route-id="@p.PartnerID">Detail</a>
+                            <a asp-controller="MenuItem" asp-action="List" asp-route-partnerId=@p.PartnerID>Menu</a>
                         </td>
                     </tr>
                 }

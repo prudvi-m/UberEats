@@ -1,12 +1,16 @@
 @* this view is used for the Add action and the Update action *@
 @model Partner
 
-@* @section scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/
-                       jquery.validate.unobtrusive.min.js"></script>
-} *@
-<h1>Add Partner</h1>
+<div class="d-flex">
+    <h2 class="my-2">Already a Partner?</h2> 
+    
+    <a class="btn btn-primary m-2" asp-controller="Account" asp-action="Login">Login</a>
+    
+    @* <button class="btn btn-sm m-2 btn btn-primary">Login</button> *@
+</div>
+
+<hr/>
+<h1 class="my-1">Add Partner</h1>
 <form asp-action="add" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
  
@@ -32,16 +36,15 @@
         <input asp-for="BusinessPhone" class="form-control">
     </div>
        <div class="mb-3">
-        <label asp-for="DriverID" class="form-label">Business Type</label>
-        <select asp-for="DriverID"
-                asp-items="@(new SelectList(ViewBag.Drivers,
-                         "DriverID","Name"))"
+        <label asp-for="CategoryID" class="form-label">Business Type</label>
+        <select asp-for="CategoryID"
+                asp-items="@(new SelectList(ViewBag.Categories,
+                         "CategoryID","Name"))"
                 class="form-select"></select>
     </div>  
-
-  
+    
     <input type="hidden" asp-for="PartnerID" />
 
     <button type="submit" class="btn btn-primary">Add</button>
-    <a asp-action="Index" class="btn btn-primary">Cancel</a>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
 </form>

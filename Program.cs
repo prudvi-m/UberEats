@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using UberEats.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<UberContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("UberContext")));
+
+// Add Identity services
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    // User settings
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<UberContext>()
+.AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -30,6 +41,8 @@ app.UseRouting();
 
 app.UseSession();
 
+// Add authentication and authorization middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
 // map route for Admin area

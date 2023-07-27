@@ -22,10 +22,13 @@ namespace UberEats.Models
       public string BusinessPhone { get; set; }
 
       [Required(ErrorMessage = "Please select a category.")]
-      public int DriverID { get; set; } 
+      public int CategoryID { get; set; } 
 
       [ValidateNever]
-      public Driver Driver { get; set; } = null!;
+      public Category Category { get; set; } = null!;
+
+      // Collection of MenuItems
+      public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
       
       public string LogoImage { get; set; } = string.Empty;
     }

@@ -1,6 +1,6 @@
-﻿@model Driver
+﻿@model Category
 @{
-    string title = ViewBag.Action + " Driver";
+    string title = ViewBag.Action + " Category";
     ViewBag.Title = title;
 }
 
@@ -14,7 +14,7 @@
         <input asp-for="Name" class="form-control">
     </div>
 
-    <input type="hidden" asp-for="DriverID" />
+    <input type="hidden" asp-for="CategoryID" />
 
     <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
     <a asp-action="List" class="btn btn-primary">Cancel</a>

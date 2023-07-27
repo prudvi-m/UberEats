@@ -1,0 +1,43 @@
+@model MenuItem
+@{
+    ViewData["Title"] = "Update Menu Item";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Update" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="MenuItemID" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Item Name</label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Price</label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <input asp-for="Description" class="form-control">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div> 
+
+    <div class="mb-3">
+        <label asp-for="MenuCategoryID" class="form-label">Menu Category</label>
+        <select asp-for="MenuCategoryID"
+                asp-items="@(new SelectList(ViewBag.MenuCategories,
+                         "MenuCategoryID","Name", Model.MenuCategoryID))"
+                class="form-select"></select>
+        <span asp-validation-for="MenuCategoryID" class="text-danger"></span>
+    </div>  
+    <input type="hidden" asp-for="PartnerID" />
+    <button type="submit" class="btn btn-primary">Update</button>
+        
+    <a asp-action="List" asp-route-partnerId=@Model.PartnerID class="btn btn-primary">Cancel</a>
+</form>

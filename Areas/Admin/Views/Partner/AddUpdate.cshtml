@@ -17,10 +17,10 @@
 <form asp-action="Update" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
       <div class="mb-3">
-        <label asp-for="DriverID" class="form-label">Driver</label>
-        <select asp-for="DriverID"
-                asp-items="@(new SelectList(ViewBag.Drivers,
-                         "DriverID","Name"))"
+        <label asp-for="CategoryID" class="form-label">Category</label>
+        <select asp-for="CategoryID"
+                asp-items="@(new SelectList(ViewBag.Categories,
+                         "CategoryID","Name"))"
                 class="form-select"></select>
     </div> 
 

@@ -19,11 +19,11 @@ namespace UberEats.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-        [Route("[area]/Drivers/{id?}")]
+        [Route("[area]/Categories/{id?}")]
         public IActionResult List()
         {
-            var categories = context.Drivers
-                .OrderBy(c => c.DriverID).ToList();
+            var categories = context.Categories
+                .OrderBy(c => c.CategoryID).ToList();
             return View(categories);
         }
 
@@ -31,29 +31,29 @@ namespace UberEats.Areas.Admin.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            return View("AddUpdate", new Driver());
+            return View("AddUpdate", new Category());
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
             ViewBag.Action = "Update";
-            var category = context.Drivers.Find(id);
+            var category = context.Categories.Find(id);
             return View("AddUpdate", category);
         }
 
         [HttpPost]
-        public IActionResult Update(Driver category)
+        public IActionResult Update(Category category)
         {
             if (ModelState.IsValid)
             {
-                if (category.DriverID == 0)
+                if (category.CategoryID == 0)
                 {
-                    context.Drivers.Add(category);
+                    context.Categories.Add(category);
                 }
                 else
                 {
-                    context.Drivers.Update(category);
+                    context.Categories.Update(category);
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -68,15 +68,15 @@ namespace UberEats.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Driver category = context.Drivers.Find(id) ?? new Driver();
+            Category category = context.Categories.Find(id) ?? new Category();
             return View(category);
         }
 
 
         [HttpPost]
-        public IActionResult Delete(Driver category)
+        public IActionResult Delete(Category category)
         {
-            context.Drivers.Remove(category);
+            context.Categories.Remove(category);
             context.SaveChanges();
             return RedirectToAction("List");
         }

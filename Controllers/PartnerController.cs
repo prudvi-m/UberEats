@@ -8,15 +8,15 @@ namespace UberEats.Controllers
     public class PartnerController : Controller
     {
         private UberContext context;
-        private List<Driver> categories;
+        private List<Category> categories;
        
         public PartnerController(UberContext ctx)
         {
             context = ctx;
-            categories = context.Drivers
-                    .OrderBy(c => c.DriverID)
+            categories = context.Categories
+                    .OrderBy(c => c.CategoryID)
                     .ToList();
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
         }
 
         public IActionResult List(string id = "All")
@@ -30,29 +30,16 @@ namespace UberEats.Controllers
             else
             {
                 products = context.Partners
-                    .Where(p => p.Driver.Name == id)
+                    .Where(p => p.Category.Name == id)
                     .OrderBy(p => p.PartnerID).ToList();
             }
 
             // use ViewBag to pass category data to view
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
             ViewBag.SelectedCategoryName = id;
 
             // bind products to view
             return View(products);
-        }
-
-        public IActionResult Detail(int id)
-        {
-            var session = new UberSession(HttpContext.Session);
-            var model = new PartnersViewModel
-            {
-                Partner = context.Partners
-                    .FirstOrDefault(t => t.PartnerID == id) ?? new Partner(),
-                ActiveDiv = session.GetActiveDiv(),
-                ActiveConf = session.GetActiveConf()
-            };
-            return View(model);
         }
       
         public IActionResult Index()
@@ -65,17 +52,23 @@ namespace UberEats.Controllers
         public IActionResult add()
         {
             Partner partner = new Partner(); 
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
             return View("add",partner);
         }
        
         [HttpPost]
-        public IActionResult add(Partner partner)
+        public IActionResult Add(Partner partner)
         {
-            context.Partners.Add(partner);
-            context.SaveChanges();
-            TempData["Message"] = "Partner Application "+partner.BusinessName+"  has been received.We will email you once the application has been recieved";
-            return RedirectToAction("","Home");  
+            if (ModelState.IsValid)
+            {
+                context.Partners.Add(partner);
+                context.SaveChanges();
+                TempData["Message"] = "Partner Application " + partner.BusinessName + " has been received. We will email you once the application has been received.";
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.Categories = categories;
+            // If ModelState is not valid, return to the add view with validation errors
+            return View("Add", partner);
         }
     }
 }

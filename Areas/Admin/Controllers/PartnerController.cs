@@ -12,14 +12,14 @@ namespace UberEats.Areas.Admin.Controllers
     {
         private UberContext context;
           
-        private List<Driver> categories;
+        private List<Category> categories;
 
     
         public PartnerController(UberContext ctx)
         {
             context = ctx;
-            categories = context.Drivers
-                    .OrderBy(c => c.DriverID)
+            categories = context.Categories
+                    .OrderBy(c => c.CategoryID)
                     .ToList();
         }
 
@@ -40,12 +40,12 @@ namespace UberEats.Areas.Admin.Controllers
             else
             {
                 products = context.Partners
-                    .Where(p => p.Driver.Name == id)
+                    .Where(p => p.Category.Name == id)
                     .OrderBy(p => p.PartnerID).ToList();
             }
 
             // use ViewBag to pass category data to view
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
             ViewBag.SelectedCategoryName = id;
 
             // bind products to view
@@ -60,7 +60,7 @@ namespace UberEats.Areas.Admin.Controllers
 
             // use ViewBag to pass action and category data to view
             ViewBag.Action = "Add";
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
 
             // bind partner to AddUpdate view
             return View("AddUpdate", partner);
@@ -71,12 +71,12 @@ namespace UberEats.Areas.Admin.Controllers
         {
             // get Partner object for specified primary key
             Partner partner = context.Partners
-                .Include(p => p.Driver)
+                .Include(p => p.Category)
                 .FirstOrDefault(p => p.PartnerID == id) ?? new Partner();
 
             // use ViewBag to pass action and category data to view
             ViewBag.Action = "Update";
-            ViewBag.Drivers = categories;
+            ViewBag.Categories = categories;
 
             // bind partner to AddUpdate view
             return View("AddUpdate", partner);
@@ -102,7 +102,7 @@ namespace UberEats.Areas.Admin.Controllers
             else
             {
                 ViewBag.Action = "Save";
-                ViewBag.Drivers = categories;
+                ViewBag.Categories = categories;
                 return View("AddUpdate", partner);
             }
         }

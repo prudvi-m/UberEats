@@ -1,0 +1,14 @@
+@model MenuItem
+@{
+    ViewData["Title"] = "Delete Menu Item";
+}
+
+<h1>Confirm Deletion</h1>
+<h3>@Model.Description</h3>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MenuItemID" />
+
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-action="List" asp-route-partnerId=@Model.PartnerID class="btn btn-primary">Cancel</a>
+</form>

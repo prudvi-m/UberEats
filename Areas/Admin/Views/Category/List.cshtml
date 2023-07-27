@@ -1,6 +1,6 @@
-﻿@model List<Driver>
+﻿@model List<Category>
 @{
-    ViewData["Title"] = "Driver Manager";
+    ViewData["Title"] = "Category Manager";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -19,15 +19,15 @@
                     <td>@category.Name</td>
                     <td>
                         <a asp-action="Update"
-                           asp-route-id="@category.DriverID">Update</a>
+                           asp-route-id="@category.CategoryID">Update</a>
                     </td>
                     <td>
                         <a asp-action="Delete"
-                           asp-route-id="@category.DriverID">Delete</a>
+                           asp-route-id="@category.CategoryID">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <a asp-action="Add" class="btn btn-primary">Add New Driver</a>
+    <a asp-action="Add" class="btn btn-primary">Add New Category</a>
 </div>
