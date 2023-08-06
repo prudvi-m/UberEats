@@ -16,7 +16,7 @@ builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<UberContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UberContext")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("UberContext")));
 
 builder.Services.AddTransient<IMenuReporsitory, MenuReporsitory>();
 

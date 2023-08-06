@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UberEats.Models
 {
-    public class UberContext : IdentityDbContext<User>
+    public class UberContext : DbContext
     {
         public UberContext(DbContextOptions<UberContext> options)
             : base(options)
