@@ -1,0 +1,98 @@
+﻿@using UberEats.Areas.Admin.Models;
+@model UserViewModel
+@{
+    ViewData["Title"] = " | Manage Users";
+}
+
+<h1 class="mb-2" style="margin-top:60px">Manage Users</h1>
+
+<h5 class="mt-2"><a asp-action="Add">Add a User</a></h5>
+
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr><th>Username</th><th>Roles</th><th></th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+        @if (Model.Users.Count() == 0)
+        {
+            <tr><td colspan="5">There are no user accounts.</td></tr>
+        }
+        else
+        {
+            @foreach (User user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        @foreach (string roleName in user.RoleNames)
+                        {
+                            <div>@roleName</div>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" asp-action="Delete"
+                              asp-route-id="@user.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Delete User
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="AddRole" asp-controller="User" asp-area="Admin"
+                   asp-route-id="@user.Id" >
+                            <button type="submit" class="btn btn-primary">
+                                Add Role
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        @foreach(string rolename in user.RoleNames)
+                        {
+                            <form method="post" asp-action="RemoveRole"
+                         asp-route-id="@user.Id" asp-route-roleid="@rolename">
+                                <button type="submit" class="btn btn-primary">
+                                    Remove Role
+                                </button>
+                            </form>
+                        }
+                       
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h1 class="mb-2">Manage Roles</h1>
+
+
+<form method="post" asp-action="SaveRole" class="d-flex mb-2">
+        <label> Add new Role</label>
+
+        <input type="text" class="form-control col-sm-6" style="margin-left:5px;" name="RoleName" />
+        <button type="submit" class="btn btn-primary" style="margin-left:4px">
+            Create Role
+        </button>
+    </form>
+
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr><th>Role</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <form method="post" asp-action="DeleteRole"
+                              asp-route-id="@role.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Delete Role
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

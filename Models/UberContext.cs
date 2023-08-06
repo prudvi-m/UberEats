@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace UberEats.Models
 {
-    public class UberContext : DbContext
+    public class UberContext : IdentityDbContext<User>
     {
         public UberContext(DbContextOptions<UberContext> options)
             : base(options)

@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UberEats.Models;
 
 namespace UberEats.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class CategoryController : Controller
     {

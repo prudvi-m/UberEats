@@ -33,9 +33,20 @@
                       @(controller == "Business" ? "active" : "")"
                       asp-area="Admin" asp-controller="Business" asp-action="Index">Business Types</a>
                 </div>
+                @using Microsoft.AspNetCore.Identity
+                @inject SignInManager<User> signInManager
+
                 <div class="navbar-nav navbar-right">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <a class="nav-link"
+                       asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+
+                        <span class="text-light">@User.Identity?.Name</span>
+                    }
+
                     <a class="nav-link"
-                      asp-area="" asp-controller="Home" asp-action="Index">View Site</a>
+                       asp-area="" asp-controller="Home" asp-action="Index">View Site</a>
                 </div>
             </nav>
         </div>
