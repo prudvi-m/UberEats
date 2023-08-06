@@ -1,9 +1,9 @@
-@model List<MenuItem>
+@model List<Item>
 @{
     ViewData["Title"] = "Welcome! Partner";
 }
 
-<h1>Menu for @ViewBag.BussinessName</h1>
+<h1>@ViewBag.menuTitle</h1>
 
 @if (TempData["message"] != null)
 {
@@ -17,14 +17,14 @@
         <ul class="list-group">
             <a asp-action="List" asp-route-id="All" asp-route-partnerId="@ViewBag.partnerId"
                class="list-group-item
-                @if (ViewBag.SelectedMenuCategoryName == "All") {
+                @if (ViewBag.SelectedItemCategoryName == "All") {
                     <text>active</text>
                 } ">All</a>
-            @foreach (MenuCategory c in ViewBag.MenuCategories)
+            @foreach (ItemCategory c in ViewBag.MenuCategories)
             {
-                <a asp-action="List" asp-route-id="@c.Name"  asp-route-partnerId="@ViewBag.partnerId"
+                <a asp-action="List" asp-route-id="@c.Name" asp-route-partnerId="@ViewBag.partnerId"
                    class="list-group-item
-                         @(ViewBag.SelectedMenuCategoryName == c.Name ? "active" : "")">
+                         @(ViewBag.SelectedItemCategoryName == c.Name ? "active" : "")">
                     @c.Name
                 </a>
             }
@@ -46,18 +46,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var menuItem in Model)
+                    @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@menuItem.Name</td>
-                            <td>@menuItem.Price</td>
-                            <td>@menuItem.Description</td>
-                            <td>@menuItem.MenuCategory.Name</td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>@item.Description</td>
+                            <td>@item.ItemCategory.Name</td>
                             <td>
-                                <a asp-action="Update" asp-route-id="@menuItem.MenuItemID">Update</a>
+                                <a asp-action="Update" asp-route-id="@item.ItemID">Update</a>
                             </td>
                             <td>
-                                <a asp-action="Delete" asp-route-id="@menuItem.MenuItemID">Delete</a>
+                                <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a>
                             </td>
                         </tr>
                     }

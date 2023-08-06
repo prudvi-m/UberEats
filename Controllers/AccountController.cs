@@ -68,47 +68,18 @@ namespace UberEats.Controllers
             return View(model);
         }
 
-        // [HttpPost]
-        // public async Task<IActionResult> LogIn(LoginViewModel model)
-        // {
-        //     if (ModelState.IsValid)
-        //     {                
-        //         var result = await signInManager.PasswordSignInAsync(
-        //             model.Username, model.Password, isPersistent: model.RememberMe, 
-        //             lockoutOnFailure: false);
-
-        //         if (result.Succeeded)
-        //         {
-        //             if (!string.IsNullOrEmpty(model.ReturnUrl) && 
-        //                 Url.IsLocalUrl(model.ReturnUrl))
-        //             {
-        //                 return Redirect(model.ReturnUrl);
-        //             }
-        //             else
-        //             {
-        //                 return RedirectToAction("Index", "Home");
-        //             }
-        //         }
-        //     }
-        //     ModelState.AddModelError("", "Invalid username/password.");
-        //     return View(model);
-        // }
-
 
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModel model)
         {
-            // Query the database to find the Partner with the matching BusinessEmail
             var partner = context.Partners.FirstOrDefault(p => p.BusinessEmail == model.Username);
 
             if (partner == null)
             {
-                // Partner with the specified email was not found
                 return NotFound();
             }
 
-            // Partner with the specified email was found, do something with it
-            return RedirectToAction("List", "MenuItem", new { partnerId = partner.PartnerID });
+            return RedirectToAction("List", "Item", new { partnerId = partner.PartnerID });
         }
 
         public ViewResult AccessDenied()

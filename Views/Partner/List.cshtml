@@ -1,9 +1,14 @@
-@model List<Partner>
+@using UberEats.Models.ViewModel;@using UberEats.Models.Grid;
+@model ViewPartnerModel
 @{
-    ViewData["Title"] = "Welcome! Partner";
+    ViewData["Title"] = "Partner";
     ViewBag.Dta="new";
 }
-
+@{
+    ViewBag.Title = "PartnerList";
+    GridData Route = Model.CurrentRoute.Clone();
+    PartnerGriddata Curentroute = Model.CurrentRoute;
+}
 <h1>@ViewBag.Title</h1>
 
 @if (TempData["message"]!=null){
@@ -34,50 +39,79 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>
+                        @{Route.SetSortAndDirection(nameof(Partner.BusinessName), Curentroute);}
+                        <a asp-action="SortedList" 
+                        asp-all-route-data="@Route.ToDictionary()">Name</a>
+                    </th>
                     <th>Address</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Type</th>
-                    @* <th>Status</th> *@
+                    <th></th>
                     <th></th>
             </thead>
             <tbody>
-                @foreach (var p in Model)
+                @foreach (var partner in Model.Partners)
                 {
                     <tr>
-                        <td>@p.BusinessName</td>
-                        <td>@p.BusinessAddress</td>
-                        <td>@p.BusinessEmail</td>
-                        <td>@p.BusinessPhone</td>
-                        @if(@p.CategoryID==1){
+                        <td>@partner.BusinessName</td>
+                        <td>@partner.BusinessAddress</td>
+                        <td>@partner.BusinessEmail</td>
+                        <td>@partner.BusinessPhone</td>
+                        @if (@partner.CategoryID == 1)
+                        {
                               <td>Restaurant</td>
                         }
-                        else if(@p.CategoryID==2){
+                        else if (@partner.CategoryID == 2)
+                        {
                              <td>Grocery</td>
                         }
-                        else if(@p.CategoryID==3){
+                        else if (@partner.CategoryID == 3)
+                        {
                             <td>Alcohol</td>
                         }
-                         else if(@p.CategoryID==4){
+                        else if (@partner.CategoryID == 4)
+                        {
                             <td>Convienience</td>
                         }
-                         else if(@p.CategoryID==5){
+                        else if (@partner.CategoryID == 5)
+                        {
                             <td>Flower shop</td>
                         }
-                        else if(@p.CategoryID==6){
+                        else if (@partner.CategoryID == 6)
+                        {
                             <td>Pet Store</td>
                         }
-                        else if(@p.CategoryID==7){
+                        else if (@partner.CategoryID == 7)
+                        {
                             <td>retail</td>
                         }
                         <td>
-                            <a asp-controller="MenuItem" asp-action="List" asp-route-partnerId=@p.PartnerID>Menu</a>
+                            <a asp-controller="Item" asp-action="List" 
+                            asp-route-partnerId=@partner.PartnerID>Menu</a>
+                        </td>
+                        <td>
+                            <a asp-action="Detail" asp-route-id="@partner.PartnerID">
+                                Detail
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <a asp-action="Add" class="btn btn-primary">Add New Partner</a>
+        <div class="mb-1">
+            @{
+                Route = Curentroute.Clone();
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    Route.PageNumber = i; string active = @Nav.Active(i, Curentroute.PageNumber);
+                    <a asp-action="SortedList" asp-all-route-data="@Route.ToDictionary()"
+                    class="btn btn-default @active">@i</a>
+                }
+            }
+        </div>
+        <a asp-action="Add" 
+        class="btn btn-primary">Add New Partner</a>
     </div>
 </div>

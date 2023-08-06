@@ -35,11 +35,9 @@ namespace UberEats.Controllers
                     .OrderBy(p => p.DriverID).ToList();
             }
 
-            // use ViewBag to pass category data to view
             ViewBag.Categories = categories;
             ViewBag.SelectedCategoryName = id;
 
-            // bind drivers to view
             return View(drivers);
         }
 
@@ -53,7 +51,6 @@ namespace UberEats.Controllers
         public IActionResult add()
         {
             Driver driver = new Driver(); 
-            // ViewBag.Categories = categories;
             return View("add",driver);
         }
        
@@ -68,9 +65,6 @@ namespace UberEats.Controllers
 
         public IActionResult VerifyEmail(string email)
         {
-            // Check if the email already exists in the database
-            // bool isEmailExists = /* Logic to check if email exists */;
-            // Access your data access layer or repository to perform the query
             
             bool isEmailExists = context.Drivers.Any(driver => driver.Email == email);
 

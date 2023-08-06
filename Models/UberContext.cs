@@ -13,8 +13,8 @@ namespace UberEats.Models
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Partner> Partners { get; set; } = null!;
         public DbSet<Driver> Drivers { get; set; } = null!;
-        public DbSet<MenuCategory> MenuCategories { get; set; } = null!;
-        public DbSet<MenuItem> MenuItems { get; set; } = null!;
+        public DbSet<ItemCategory> MenuCategories { get; set; } = null!;
+        public DbSet<Item> Menu { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,24 +30,24 @@ namespace UberEats.Models
                 new Category { CategoryID= 7,Name = "retail"}
             );
 
-            modelBuilder.Entity<MenuCategory>().HasData(
-                new MenuCategory { MenuCategoryID = 1, Name = "Appetizer" },
-                new MenuCategory { MenuCategoryID = 2, Name = "Soup" },
-                new MenuCategory { MenuCategoryID = 3, Name = "Salad" },
-                new MenuCategory { MenuCategoryID= 4, Name = "Main Course"},
-                new MenuCategory { MenuCategoryID= 5, Name = "Dessert"},
-                new MenuCategory { MenuCategoryID= 6,Name = "Drink"},
-                new MenuCategory { MenuCategoryID= 7,Name = "Vegetarian"}
+            modelBuilder.Entity<ItemCategory>().HasData(
+                new ItemCategory { ItemCategoryID = 1, Name = "Appetizer" },
+                new ItemCategory { ItemCategoryID = 2, Name = "Soup" },
+                new ItemCategory { ItemCategoryID = 3, Name = "Salad" },
+                new ItemCategory { ItemCategoryID= 4, Name = "Main Course"},
+                new ItemCategory { ItemCategoryID= 5, Name = "Dessert"},
+                new ItemCategory { ItemCategoryID= 6,Name = "Drink"},
+                new ItemCategory { ItemCategoryID= 7,Name = "Vegetarian"}
             );
 
-            modelBuilder.Entity<MenuItem>().HasData(
-                new MenuItem {
-                    MenuItemID = 1,
-                    Name = "Payasam",
-                    Price = 5.2,
-                    Description = "Traditional Delicious Sweet",
-                    MenuCategoryID = 5,
-                    PartnerID = 1
+            modelBuilder.Entity<Item>().HasData(
+                new Item {
+                    ItemID = 1,
+                    PartnerID = 1,
+                    Name = "Biscochitos",
+                    Price = 31.5,
+                    Description = "Mast Brothers bittersweet chocolate",
+                    ItemCategoryID = 5
                 }
             );
 
@@ -57,10 +57,50 @@ namespace UberEats.Models
                 {
                     PartnerID = 1,
                     CategoryID = 1,
-                    BusinessName = "intial",
-                    BusinessAddress = "Chicago, 3001",
-                    BusinessEmail = "intial@gmail.com",
-                    BusinessPhone = "123456"
+                    BusinessName = "Vinod Restaurant",
+                    BusinessAddress = "Chicago, 401, West Downtown",
+                    BusinessEmail = "vr@gmail.com",
+                    BusinessPhone = "007"
+                },new Partner
+                {
+                    PartnerID = 2,
+                    CategoryID = 2,
+                    BusinessName = "AdventureQuest Tours",
+                    BusinessAddress = "Dallas, 401, East Downtown",
+                    BusinessEmail = "vr@gmail.com",
+                    BusinessPhone = "007"
+                },new Partner
+                {
+                    PartnerID = 3,
+                    CategoryID = 3,
+                    BusinessName = "CodeCraft Solutions",
+                    BusinessAddress = "Illinios, 402",
+                    BusinessEmail = "CodeCraft@gmail.com",
+                    BusinessPhone = "007"
+                },new Partner
+                {
+                    PartnerID = 4,
+                    CategoryID = 2,
+                    BusinessName = "DecoCraft Interiors",
+                    BusinessAddress = "Texas, 403",
+                    BusinessEmail = "DecoCraft@gmail.com",
+                    BusinessPhone = "007"
+                },new Partner
+                {
+                    PartnerID = 5,
+                    CategoryID = 1,
+                    BusinessName = "Vinod Restaurant",
+                    BusinessAddress = "Chicago, 401, West Downtown",
+                    BusinessEmail = "vr@gmail.com",
+                    BusinessPhone = "007"
+                },new Partner
+                {
+                    PartnerID = 6,
+                    CategoryID = 3,
+                    BusinessName = "Vinod Restaurant",
+                    BusinessAddress = "Chicago, 401, West Downtown",
+                    BusinessEmail = "vr@gmail.com",
+                    BusinessPhone = "007"
                 }
             );
         }

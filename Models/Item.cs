@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace UberEats.Models
 {
-    public class MenuItem
+    public class Item
     {
       
-      public int MenuItemID { get; set; }
-
+      public int ItemID { get; set; }
+            
       public string Name { get; set; }
 
       [Required(ErrorMessage = "Please enter a Price.")]
@@ -21,10 +21,10 @@ namespace UberEats.Models
       public int PartnerID { get; set; }
 
       [Required(ErrorMessage = "Please select a menu category.")]
-      public int MenuCategoryID { get; set; } 
+      public int ItemCategoryID { get; set; } 
 
       [ValidateNever]
-      public MenuCategory MenuCategory { get; set; } = null!;
+      public ItemCategory ItemCategory { get; set; } = null!;
     
     }
 }

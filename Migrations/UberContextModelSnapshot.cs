@@ -116,61 +116,9 @@ namespace UberEats.Migrations
                     b.ToTable("Drivers");
                 });
 
-            modelBuilder.Entity("UberEats.Models.MenuCategory", b =>
+            modelBuilder.Entity("UberEats.Models.Item", b =>
                 {
-                    b.Property<int>("MenuCategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("MenuCategoryID");
-
-                    b.ToTable("MenuCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            MenuCategoryID = 1,
-                            Name = "Appetizer"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 2,
-                            Name = "Soup"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 3,
-                            Name = "Salad"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 4,
-                            Name = "Main Course"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 5,
-                            Name = "Dessert"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 6,
-                            Name = "Drink"
-                        },
-                        new
-                        {
-                            MenuCategoryID = 7,
-                            Name = "Vegetarian"
-                        });
-                });
-
-            modelBuilder.Entity("UberEats.Models.MenuItem", b =>
-                {
-                    b.Property<int>("MenuItemID")
+                    b.Property<int>("ItemID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -178,7 +126,7 @@ namespace UberEats.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("MenuCategoryID")
+                    b.Property<int>("ItemCategoryID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -191,23 +139,75 @@ namespace UberEats.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.HasKey("MenuItemID");
+                    b.HasKey("ItemID");
 
-                    b.HasIndex("MenuCategoryID");
+                    b.HasIndex("ItemCategoryID");
 
                     b.HasIndex("PartnerID");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("Menu");
 
                     b.HasData(
                         new
                         {
-                            MenuItemID = 1,
-                            Description = "Traditional Delicious Sweet",
-                            MenuCategoryID = 5,
-                            Name = "Payasam",
+                            ItemID = 1,
+                            Description = "Mast Brothers bittersweet chocolate, salted caramel, cacao crust, olive oil and a sprinkling of sea salt",
+                            ItemCategoryID = 5,
+                            Name = "Biscochitos",
                             PartnerID = 1,
-                            Price = 5.2000000000000002
+                            Price = 31.5
+                        });
+                });
+
+            modelBuilder.Entity("UberEats.Models.ItemCategory", b =>
+                {
+                    b.Property<int>("ItemCategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ItemCategoryID");
+
+                    b.ToTable("MenuCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ItemCategoryID = 1,
+                            Name = "Appetizer"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 2,
+                            Name = "Soup"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 3,
+                            Name = "Salad"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 4,
+                            Name = "Main Course"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 5,
+                            Name = "Dessert"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 6,
+                            Name = "Drink"
+                        },
+                        new
+                        {
+                            ItemCategoryID = 7,
+                            Name = "Vegetarian"
                         });
                 });
 
@@ -250,30 +250,30 @@ namespace UberEats.Migrations
                         new
                         {
                             PartnerID = 1,
-                            BusinessAddress = "Chicago, 3001",
-                            BusinessEmail = "intial@gmail.com",
-                            BusinessName = "intial",
-                            BusinessPhone = "123456",
+                            BusinessAddress = "Chicago, 401, West Downtown",
+                            BusinessEmail = "vr@gmail.com",
+                            BusinessName = "Vinod Restaurant",
+                            BusinessPhone = "007",
                             CategoryID = 1,
                             LogoImage = ""
                         });
                 });
 
-            modelBuilder.Entity("UberEats.Models.MenuItem", b =>
+            modelBuilder.Entity("UberEats.Models.Item", b =>
                 {
-                    b.HasOne("UberEats.Models.MenuCategory", "MenuCategory")
+                    b.HasOne("UberEats.Models.ItemCategory", "ItemCategory")
                         .WithMany()
-                        .HasForeignKey("MenuCategoryID")
+                        .HasForeignKey("ItemCategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UberEats.Models.Partner", null)
-                        .WithMany("MenuItems")
+                        .WithMany("Menu")
                         .HasForeignKey("PartnerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MenuCategory");
+                    b.Navigation("ItemCategory");
                 });
 
             modelBuilder.Entity("UberEats.Models.Partner", b =>
@@ -289,7 +289,7 @@ namespace UberEats.Migrations
 
             modelBuilder.Entity("UberEats.Models.Partner", b =>
                 {
-                    b.Navigation("MenuItems");
+                    b.Navigation("Menu");
                 });
 #pragma warning restore 612, 618
         }

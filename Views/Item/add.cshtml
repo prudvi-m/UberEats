@@ -1,16 +1,16 @@
-@model MenuItem
+@model Item
 
 <h1 class="my-1">Add Item</h1>
 <form asp-action="Add" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-3">
-        <label asp-for="MenuCategoryID" class="form-label">Category</label>
-        <select asp-for="MenuCategoryID"
+        <label asp-for="ItemCategoryID" class="form-label">Category</label>
+        <select asp-for="ItemCategoryID"
                 asp-items="@(new SelectList(ViewBag.MenuCategories,
-                         "MenuCategoryID","Name"))"
+                         "ItemCategoryID","Name"))"
                 class="form-select"></select>
-        <span asp-validation-for="MenuCategoryID" class="text-danger"></span>
+        <span asp-validation-for="ItemCategoryID" class="text-danger"></span>
     </div>  
 
     <div class="mb-3">
@@ -35,5 +35,4 @@
     
     <button type="submit" class="btn btn-primary">Add</button>
     <a asp-action="List" asp-route-partnerId=@Model.PartnerID class="btn btn-primary">Cancel</a>
-    
 </form>

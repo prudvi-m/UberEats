@@ -1,4 +1,4 @@
-@model MenuItem
+@model Item
 @{
     ViewData["Title"] = "Update Menu Item";
 }
@@ -8,7 +8,7 @@
 <form asp-action="Update" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <input type="hidden" asp-for="MenuItemID" />
+    <input type="hidden" asp-for="ItemID" />
 
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Item Name</label>
@@ -29,12 +29,12 @@
     </div> 
 
     <div class="mb-3">
-        <label asp-for="MenuCategoryID" class="form-label">Menu Category</label>
-        <select asp-for="MenuCategoryID"
+        <label asp-for="ItemCategoryID" class="form-label">Menu Category</label>
+        <select asp-for="ItemCategoryID"
                 asp-items="@(new SelectList(ViewBag.MenuCategories,
-                         "MenuCategoryID","Name", Model.MenuCategoryID))"
+                         "ItemCategoryID","Name", Model.ItemCategoryID))"
                 class="form-select"></select>
-        <span asp-validation-for="MenuCategoryID" class="text-danger"></span>
+        <span asp-validation-for="ItemCategoryID" class="text-danger"></span>
     </div>  
     <input type="hidden" asp-for="PartnerID" />
     <button type="submit" class="btn btn-primary">Update</button>

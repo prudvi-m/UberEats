@@ -44,41 +44,33 @@ namespace UberEats.Areas.Admin.Controllers
                     .OrderBy(p => p.PartnerID).ToList();
             }
 
-            // use ViewBag to pass category data to view
             ViewBag.Categories = categories;
             ViewBag.SelectedCategoryName = id;
 
-            // bind products to view
             return View(products);
         }
         [Route("[area]/[controller]/add")]
         [HttpGet]
         public IActionResult Add()
         {
-            // create new Partner object
             Partner partner = new Partner();                
 
-            // use ViewBag to pass action and category data to view
             ViewBag.Action = "Add";
             ViewBag.Categories = categories;
 
-            // bind partner to AddUpdate view
             return View("AddUpdate", partner);
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            // get Partner object for specified primary key
             Partner partner = context.Partners
                 .Include(p => p.Category)
                 .FirstOrDefault(p => p.PartnerID == id) ?? new Partner();
 
-            // use ViewBag to pass action and category data to view
             ViewBag.Action = "Update";
             ViewBag.Categories = categories;
 
-            // bind partner to AddUpdate view
             return View("AddUpdate", partner);
         }
 
@@ -87,11 +79,11 @@ namespace UberEats.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (partner.PartnerID == 0)           // new partner
+                if(partner.PartnerID == 0)
                 {
                     context.Partners.Add(partner);
                 }
-                else                                  // existing partner
+                else 
                 {
                     context.Partners.Update(partner);
                     TempData["Message"] = "Partner Application "+partner.BusinessName+"  has been Updated";
@@ -144,10 +136,6 @@ namespace UberEats.Areas.Admin.Controllers
             TempData["data"]="Approve";
             TempData["Message"] = "Partner Application  "+partner.BusinessName+"has been approved";
             return RedirectToAction("List");
-            // context.Partners.Remove(partner);
-            // context.SaveChanges();
-            // // TempData["Message"] = "Partner Application has been Removed";
-            // return RedirectToAction("List");
         }
     }
 }
